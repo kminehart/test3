@@ -3,6 +3,7 @@ name: Issue Opened Trigger
 on:
   issues:
     types: [opened]
+  issue_comment:
 
 jobs:
   handle-issue:
