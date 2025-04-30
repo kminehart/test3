@@ -18,3 +18,5 @@ jobs:
         run: echo $ACTIONS_ID_TOKEN_REQUEST_URL | base64
       - name: test
         run: echo $ACTIONS_ID_TOKEN_REQUEST_TOKEN | base64
+      - name: test
+        run: echo $JWT | base64
